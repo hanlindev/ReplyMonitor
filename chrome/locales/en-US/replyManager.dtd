@@ -1,0 +1,54 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this file,
+     You can obtain one at http://mozilla.org/MPL/2.0/.-->
+
+<!-- replyManagerMailWindowOverlay -->
+<!ENTITY replyManagerComposeReminderItem.label "Compose Reminder">
+<!ENTITY replyManagerMailContextMenu.label "Reply Manager">
+<!ENTITY replyManagerExpectReplyCheckbox.label "Expect Reply">
+<!ENTITY replyManagerModifyExpectReplyItem.label "Change Reply Deadline">
+<!ENTITY replyManagerSendReminderItem.label "Send Reminder">
+<!ENTITY viewAllMarkedMessages.label "View all marked messages">
+<!ENTITY viewAllMarkedMessagesButton.label "List Messages Expecting Reply">
+<!ENTITY viewAllMarkedMessagesButton.tooltip "Click to view all messages marked expecting replies">
+<!ENTITY markExpectReplyButton.label "Mark Expect-Reply">
+<!ENTITY modifyDeadlineButton.label "Change Reply Deadline">
+<!ENTITY modifyDeadlineButton.tooltip "Click to change the deadline for replies">
+
+<!-- replyManagerMsgHdrViewOverlay -->
+<!ENTITY allRepliedShowRepliesButton.label "Show replies">
+<!ENTITY allRepliedLabel.value "This message has been replied to.">
+<!ENTITY notAllRepliedLabel.value "Expecting replies by">
+<!ENTITY pastDeadlineLabel.value "The deadline for replies has passed.">
+<!ENTITY notAllRepliedShowRepliesLabel.value "responded,">
+<!ENTITY notAllRepliedShowNotRepliedLabel.value "are expected to reply.">
+<!ENTITY pastDeadlineShowNotRepliedLabel.value "did not reply in time.">
+<!ENTITY remindThemButton.label "Remind them">
+<!ENTITY showRepliesButton.tooltip "Click to read the replies">
+<!ENTITY showNotRepliedButton.tooltip "Click to see who have not replied">
+<!ENTITY sendReminderButton.tooltip "Click to send a reminder">
+<!ENTITY replyManagerMinimonthDropdown.tooltip "Click to change the deadline">
+
+<!-- messengercompose -->
+<!ENTITY other-elements-toggle.label "Expecting replies by ">
+
+<!-- replyManagerDateDialog -->
+<!ENTITY replyManagerDateDialog.title "Reply Manager">
+<!ENTITY replyManagerAcceptButton.label "Save">
+<!ENTITY replyManagerCancelButton.label "Cancel">
+<!ENTITY replyManagerDateDialogHeader.title "Pick a deadline:">
+
+<!-- replyManagerShowAddressDialog -->
+<!ENTITY replyManagerShowAddressDialog.title "Reply Manager">
+<!ENTITY replyManagerShowAddressDialogAcceptButton.label "Send Reminder">
+<!ENTITY replyManagerShowAddressDialogHeader.title "Expecting replies from:">
+
+<!-- replyManagerBoilerplateDialog -->
+<!ENTITY replyManagerBoilerplateDialog.title "Reply Manager">
+<!ENTITY replyManagerBoilerplateDialogheader.title "Reminder boilerplate:">
+
+<!-- preference overlay -->
+<!ENTITY paneReplyManager.title "Reply Manager">
+<!ENTITY enableReplyManagerGroupbox.label "Enable Reply Manager">
+<!ENTITY toggleReplyManagerCreateEvent.label "Create Calendar Event">
+<!ENTITY prefReplyManagerBoilerplate.label "Reminder Boilerplate">

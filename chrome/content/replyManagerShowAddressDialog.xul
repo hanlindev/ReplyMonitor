@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this file,
+     You can obtain one at http://mozilla.org/MPL/2.0/.-->
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://replymanager/skin/replyManager.css"?>
+<!DOCTYPE dialog  SYSTEM "chrome://replymanager/locale/replyManager.dtd">
+
+<dialog id="replyManagerShowAddressDialog"
+        title="&replyManagerShowAddressDialog.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="onLoad();"
+        buttons="accept,cancel"
+        buttonlabelaccept="&replyManagerShowAddressDialogAcceptButton.label;"
+        ondialogaccept="return doOK();"
+        ondialogcancel="return doCancel();"
+        flex="1">
+
+  <script type="application/javascript"
+          src="chrome://replymanager/content/replyManagerShowAddressDialog.js"/>
+  <dialogheader title="&replyManagerShowAddressDialogHeader.title;"/>
+  <richlistbox id="replyManagerAddressRichlist" flex="1"/>
+</dialog>

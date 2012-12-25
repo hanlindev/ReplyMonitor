@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this file,
+     You can obtain one at http://mozilla.org/MPL/2.0/.-->
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://calendar/content/widgets/calendar-widget-bindings.css" type="text/css"?>
+<?xml-stylesheet href="chrome://calendar/skin/widgets/minimonth.css" type="text/css"?>
+<!DOCTYPE dialog  SYSTEM "chrome://replymanager/locale/replyManager.dtd">
+
+<dialog id="replyManagerDateDialog"
+        title="&replyManagerDateDialog.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="onLoad();"
+        buttons="accept,cancel"
+        buttonlabelaccept="&replyManagerAcceptButton.label;"
+        buttonlabelcancel="&replyManagerCancelButton.label;"
+        ondialogaccept="return doOK();"
+        ondialogcancel="return doCancel();"
+        flex="1">
+
+  <script type="application/javascript" src="chrome://calendar/content/calUtils.js"/>
+  <script type="application/javascript" src="chrome://calendar/content/calendar-ui-utils.js"/>
+  <script type="application/javascript" src="chrome://replymanager/content/replyManagerDateDialog.js"/>
+  <dialogheader title="&replyManagerDateDialogHeader.title;"/>
+  <minimonth id="replyManagerDatePicker"/>
+</dialog>

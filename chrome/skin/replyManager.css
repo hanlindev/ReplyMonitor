@@ -1,0 +1,92 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* replyManagerMsgHdrViewOverlay.xul */
+.replyManagerHdrViewIcon {
+  width: 16px;
+  height: 16px;
+}
+.replyManagerHdrViewButton {
+  -moz-appearance: toolbarbutton !important;
+  margin: 0px 0.1em 0.1px 0.1em;
+  font-weight: bold;
+}
+.pastDeadline {
+  list-style-image: url("chrome://messenger/skin/icons/exclude-selected.png");
+}
+
+.allReplied {
+  list-style-image: url("chrome://messenger/skin/icons/tick.png");
+}
+
+.notAllReplied {
+  list-style-image: url("chrome://messenger/skin/icons/error.png");
+}
+
+.replyManagerHBox {
+  -moz-box-align: center;
+}
+
+.replyManagerVBox {
+  -moz-box-align: end;
+}
+
+/* replyManagerShowAddressDialog.xul */
+#replyManagerShowAddressDialog {
+  height: 250px;
+}
+
+#replyManagerAddressRichlist {
+  height: 100%;
+  width: 100%;
+}
+
+/* preference */
+.replyManagerPrefpaneBox {
+  height: 400px;
+}
+
+#boilerplateTextGroupbox {
+  height: 100%;
+  width: 100%;
+}
+
+#reminderBoilerplateTextbox {
+  width: 100%;
+  height: 100%;
+}
+
+/* replyManagerComposeWindowOverlay.xul */
+.replyManagerComposeWindowEmptySpace {
+  width: 9em;
+}
+
+.expectReplyUnchecked {
+  font-weight: lighter;
+}
+
+.expectReplyChecked {
+  font-weight: normal;
+}
+
+/* replyManagerMailWindowOverlay.xul */
+#viewAllMarkedMessagesButton {
+  /* TODO add a suitable icon to this button */
+  list-style-image: url("chrome://messenger/skin/activity/indexMailIcon.png");
+}
+
+.markExpectReplyButton {
+  /* TODO add a suitable icon to this button */
+  list-style-image: url("chrome://messenger/skin/activity/addItemIcon.png");
+}
+
+.unmarkExpectReplyButton {
+  /* TODO add a suitable icon to this button */
+  list-style-image: url("chrome://messenger/skin/activity/removeItemIcon.png");
+}
+
+#modifyDeadlineButton {
+  /* TODO add a suitable icon to this button */
+  list-style-image: url("chrome://messenger/skin/activity/syncMailIcon.png");
+}

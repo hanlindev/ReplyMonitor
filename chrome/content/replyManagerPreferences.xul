@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<?xml-stylesheet href="chrome://replymanager/skin/replyManager.css"?>
+<!DOCTYPE overlay [
+    <!ENTITY % replyManagerDTD SYSTEM "chrome://replymanager/locale/replyManager.dtd">
+    %replyManagerDTD;
+]>
+
+<overlay id="ReplyManagerPaneOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <vbox id="calPreferencesBoxReplyManager">
+    <script type="application/javascript"
+            src="chrome://replymanager/content/replyManagerPreferences.js"/>
+    <preferences>
+      <preference id="extensions.replymanager.enabled"
+                  name="extensions.replymanager.enabled"
+                  type="bool"
+                  onchange="gReplyManagerPane.toggleReplyManagerEnabled();"/>
+      <preference id="extensions.replymanager.create_calendar_event_enabled"
+                  name="extensions.replymanager.create_calendar_event_enabled"
+                  type="bool"/>
+      <preference id="extensions.replymanager.boilerplate"
+                  name="extensions.replymanager.boilerplate"
+                  type="string"/>
+    </preferences>
+
+
+    <checkbox id="enableReplyManagerCheckbox"
+              label="&enableReplyManagerGroupbox.label;"
+              preference="extensions.replymanager.enabled"/>
+
+    <checkbox id="toggleReplyManagerCreateEvent"
+              label="&toggleReplyManagerCreateEvent.label;"
+              preference="extensions.replymanager.create_calendar_event_enabled"/>
+
+    <caption label="&prefReplyManagerBoilerplate.label;"/>
+    <textbox id="reminderBoilerplateTextbox" multiline="true"
+             newlines="pasteintact" flex="1"
+             height="300"
+             preference="extensions.replymanager.boilerplate"/>
+  </vbox>
+
+</overlay>

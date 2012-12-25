@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this file,
+     You can obtain one at http://mozilla.org/MPL/2.0/.-->
+
+<!DOCTYPE overlay[
+<!ENTITY % replyManagerDTD SYSTEM "chrome://replymanager/locale/replyManager.dtd">
+%replyManagerDTD;
+]>
+<overlay id="replyManagerMailWindowOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://replymanager/content/replyManagerMailWindowOverlay.js"/>
+
+  <commandset>
+    <command id="cmd_modifyExpectReply" oncommand="modifyExpectReply();"/>
+    <command id="cmd_startComposeReminder" oncommand="startComposeReminder();"/>
+    <command id="cmd_viewAllMarkedMessages" oncommand="replyManagerTabOpener.openTab();"/>
+    <command id="cmd_toolbarMarkExpectReply" oncommand="toolbarMarkExpectReply();"/>
+  </commandset>
+
+  <menupopup id="messageMenuPopup">
+    <!-- This menu is the same as that in the mailContext menu -->
+    <menu id="replyManagerMessageMenu" label="&replyManagerMailContextMenu.label;">
+      <menupopup id="replyManagerMessageMenupopup"
+                 onpopupshowing="onReplyManagerPopupShowing(this.id);">
+        <menuitem id="messageExpectReplyCheckbox"
+                  label="&replyManagerExpectReplyCheckbox.label;"
+                  oncommand="toggleExpectReplyCheckbox(this.id);"/>
+        <menuitem id="messageModifyExpectReplyItem"
+                  label="&replyManagerModifyExpectReplyItem.label;"
+                  command="cmd_modifyExpectReply"/>
+        <menuitem id="messageSendReminderItem"
+                  label="&replyManagerSendReminderItem.label;"
+                  command="cmd_startComposeReminder"/>
+        <menuseparator/>
+        <menuitem id="viewAllMarkedMessages" label="&viewAllMarkedMessages.label;"
+                  command="cmd_viewAllMarkedMessages"/>
+      </menupopup>
+    </menu>
+  </menupopup>
+
+  <menupopup id="mailContext">
+    <menu id="replyManagerMailContextMenu" label="&replyManagerMailContextMenu.label;">
+      <menupopup id="replyManagerMailContextMenupopup"
+                 onpopupshowing="onReplyManagerPopupShowing(this.id);">
+        <menuitem id="expectReplyCheckbox"
+                  label="&replyManagerExpectReplyCheckbox.label;"
+                  oncommand="toggleExpectReplyCheckbox(this.id);"/>
+        <menuitem id="modifyExpectReplyItem" label="&replyManagerModifyExpectReplyItem.label;"
+                  command="cmd_modifyExpectReply"/>
+        <menuitem id="sendReminderItem" label="&replyManagerSendReminderItem.label;"
+                  command="cmd_startComposeReminder"/>
+        <menuseparator/>
+        <menuitem id="viewAllMarkedMessages" label="&viewAllMarkedMessages.label;"
+                  command="cmd_viewAllMarkedMessages"/>
+      </menupopup>
+    </menu>
+  </menupopup>
+
+  <toolbarpalette id="MailToolbarPalette">
+    <toolbarbutton id="viewAllMarkedMessagesButton"/>
+    <toolbarbutton id="markExpectReplyButton"/>
+    <toolbarbutton id="modifyDeadlineButton"/>
+  </toolbarpalette>
+
+  <toolbarbutton id="viewAllMarkedMessagesButton"
+                 label="&viewAllMarkedMessagesButton.label;"
+                 tooltiptext="&viewAllMarkedMessagesButton.tooltip;"
+                 command="cmd_viewAllMarkedMessages"/>
+  <toolbarbutton id="markExpectReplyButton"
+                 label="&markExpectReplyButton.label;"
+                 command="cmd_toolbarMarkExpectReply"/>
+  <toolbarbutton id="modifyDeadlineButton"
+                 label="&modifyDeadlineButton.label;"
+                 tooltiptext="&modifyDeadlineButton.tooltip;"
+                 command="cmd_modifyExpectReply"/>
+</overlay>

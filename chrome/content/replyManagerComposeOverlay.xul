@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<?xml-stylesheet href="chrome://replymanager/skin/replyManager.css"?>
+<?xml-stylesheet href="chrome://calendar/content/widgets/calendar-widget-bindings.css" type="text/css"?>
+<?xml-stylesheet href="chrome://calendar/content/datetimepickers/datetimepickers.css" type="text/css"?>
+<!DOCTYPE window [
+  <!ENTITY % replyManagerDTD SYSTEM "chrome://replymanager/locale/replyManager.dtd">
+  %replyManagerDTD;
+]>
+
+<overlay id="replyManagerMessengerComposeOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/javascript" src="chrome://replymanager/content/replyManagerComposeOverlay.js"/>
+<script type="application/javascript" src="chrome://calendar/content/calUtils.js"/>
+
+<commandset>
+  <command id="cmd_toggle_other_replymanager_elements" oncommand="toggleOtherReplyManagerElements();"/>
+</commandset>
+
+<toolbox id="headers-box">
+  <hbox id="replymanager-hbox">
+    <!-- this is used for lining the following elements up with the other input fields -->
+    <box class="replyManagerComposeWindowEmptySpace"/>
+    <checkbox id="other-elements-toggle" label="&other-elements-toggle.label;" checked="false"
+              command="cmd_toggle_other_replymanager_elements"
+              class="expectReplyUnchecked"/>
+    <datepicker id="reminder-date" disabled="true"/>
+  </hbox>
+</toolbox>
+</overlay>

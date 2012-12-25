@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this file,
+     You can obtain one at http://mozilla.org/MPL/2.0/.-->
+<?xml-stylesheet href="chrome://replymanager/skin/replyManager.css" type="text/css"?>
+<!DOCTYPE overlay[
+<!ENTITY % replyManagerDTD SYSTEM "chrome://replymanager/locale/replyManager.dtd">
+%replyManagerDTD;
+]>
+<overlay id="replyManagerMsgHdrViewOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://replymanager/content/replyManagerMsgHdrViewOverlay.js"/>
+
+  <commandset>
+    <command id="cmd_hdrViewToggleExpectReply" oncommand="toggleHdrViewExpectReplyCheckbox();"/>
+    <command id="cmd_hdrViewModifyExpectReply"
+             disabled="true"
+             oncommand="hdrViewModifyExpectReply();"/>
+    <command id="cmd_hdrViewStartComposeReminder"
+             oncommand="startComposeReminder();"/>
+    <command id="cmd_replyManagerShowConversation"
+             oncommand="gConversationOpener.openConversationForMessages(gFolderDisplay.selectedMessages);"/>
+    <command id="cmd_replyManagerShowNotReplied"
+             oncommand="showNotReplied();"/>
+  </commandset>
+
+  <vbox id="otherActionsBox">
+    <hbox id="replyManagerMsgHdrViewBox" position="2">
+      <vbox>
+        <!-- Only one of the following vboxes will be visible, which is determined by the hdrViewDeployItems function -->
+        <vbox id="allRepliedBox" class="replyManagerVBox">
+          <hbox class="replyManagerHBox">
+            <image id="allRepliedIcon" class="replyManagerHdrViewIcon allReplied"/>
+            <label id="allRepliedLabel" value="&allRepliedLabel.value;" role="textbox"
+                   aria-readonly="true"/>
+            <button id="allRepliedShowRepliesButton" label="&allRepliedShowRepliesButton.label;"
+                    command="cmd_replyManagerShowConversation"
+                    tooltiptext="&showRepliesButton.tooltip;"
+                    class="msgHeaderView-button replyManagerHdrViewButton"/>
+          </hbox>
+        </vbox>
+
+        <!-- There are two situations: past deadline or not -->
+        <vbox id="notAllRepliedBox" class="replyManagerVBox">
+          <hbox class="replyManagerHBox">
+            <!-- The image is set in the hdrViewDeployItems method -->
+            <image id="notAllRepliedIcon"/>
+
+            <!-- This label is shown if still within deadline -->
+            <label id="notAllRepliedLabel" value="&notAllRepliedLabel.value;" role="textbox"
+                   aria-readonly="true"/>
+
+            <!-- A lightning-style datepicker to provide easy-modification of the expect-reply date -->
+            <toolbarbutton id="replyManagerMinimonthDropdown" type="menu"
+                           tooltiptext="&replyManagerMinimonthDropdown.tooltip;"
+						   class="replyManagerHdrViewButton">
+              <panel id="replyManagerMinimonthPanel" position="after_end">
+                <minimonth id="replyManagerMinimonth"
+                           onchange="onMinimonthChange(this.value);
+                             document.getElementById('replyManagerMinimonthPanel').hidePopup();"/>
+              </panel>
+            </toolbarbutton>
+
+            <!-- This label is shown if past deadline -->
+            <label id="pastDeadlineLabel" value="&pastDeadlineLabel.value;" role="textbox"
+                   aria-readonly="true"/>
+
+            <button id="notAllRepliedShowRepliesButton" command="cmd_replyManagerShowConversation"
+                    tooltiptext="&showRepliesButton.tooltip;"
+                    class="msgHeaderView-button replyManagerHdrViewButton"/>
+            <label id="notAllRepliedShowRepliesLabel" value="&notAllRepliedShowRepliesLabel.value;"
+                   role="textbox" aria-readonly="true"/>
+          </hbox>
+
+          <hbox class="replyManagerHBox">
+            <button id="showNotRepliedButton" command="cmd_replyManagerShowNotReplied"
+                    tooltiptext="&showNotRepliedButton.tooltip;"
+                    class="msgHeaderView-button replyManagerHdrViewButton"/>
+
+            <!-- This label is shown if still within deadline -->
+            <label id="notAllRepliedShowNotRepliedLabel"
+                   value="&notAllRepliedShowNotRepliedLabel.value;"
+                   role="textbox" aria-readonly="true"/>
+
+            <!-- This label is shown if past deadline -->
+            <label id="pastDeadlineShowNotRepliedLabel"
+                   value="&pastDeadlineShowNotRepliedLabel.value;"
+                   role="textbox" aria-readonly="true"/>
+
+          <button id="notAllRepliedRemindThemButton" label="&remindThemButton.label;"
+                  command="cmd_hdrViewStartComposeReminder"
+                  tooltiptext="&sendReminderButton.tooltip;"
+                  class="msgHeaderView-button replyManagerHdrViewButton"/>
+          </hbox>
+        </vbox>
+      </vbox>
+
+    </hbox>
+  </vbox>
+
+  <menupopup id="otherActionsPopup">
+    <menuitem id="hdrViewExpectReplyCheckbox" label="&replyManagerExpectReplyCheckbox.label;"
+              type="checkbox"
+              autocheck="false" command="cmd_hdrViewToggleExpectReply" position="6"/>
+    <menuitem id="hdrViewModifyExpectReplyItem" label="&replyManagerModifyExpectReplyItem.label;"
+              command="cmd_hdrViewModifyExpectReply" position="7"/>
+    <menuitem id="hdrViewSendReminderItem" label="&replyManagerSendReminderItem.label;"
+              command="cmd_hdrViewStartComposeReminder" position="8"/>
+    <menuseparator id="replyManagerHdrViewSep" position="9"/>
+  </menupopup>
+</overlay>
