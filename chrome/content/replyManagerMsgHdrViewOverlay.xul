@@ -101,13 +101,13 @@
   </vbox>
 
   <menupopup id="otherActionsPopup">
+    <menuseparator id="replyManagerHdrViewSep" position="6"/>
     <menuitem id="hdrViewExpectReplyCheckbox" label="&replyManagerExpectReplyCheckbox.label;"
               type="checkbox"
-              autocheck="false" command="cmd_hdrViewToggleExpectReply" position="6"/>
+              autocheck="false" command="cmd_hdrViewToggleExpectReply" position="7"/>
     <menuitem id="hdrViewModifyExpectReplyItem" label="&replyManagerModifyExpectReplyItem.label;"
-              command="cmd_hdrViewModifyExpectReply" position="7"/>
+              command="cmd_hdrViewModifyExpectReply" position="8"/>
     <menuitem id="hdrViewSendReminderItem" label="&replyManagerSendReminderItem.label;"
-              command="cmd_hdrViewStartComposeReminder" position="8"/>
-    <menuseparator id="replyManagerHdrViewSep" position="9"/>
+              command="cmd_hdrViewStartComposeReminder" position="9"/>
   </menupopup>
 </overlay>
