@@ -113,6 +113,8 @@ let ReplyManagerUtils = {
       let subject = aGlodaMessage.subject;
       let recipients = getNotRepliedRecipients(aRecipientsList);
       let dateStr = (aDateStr) ? aDateStr : aMsgHdr.getStringProperty("ExpectReplyDate");
+	  // Convert to locale date string
+	  dateStr = (new Date(dateStr)).toLocaleDateString();
       let newDate = (aDateStr) ? getDateForICalString(aDateStr)
                                : null;
 
@@ -121,7 +123,7 @@ let ReplyManagerUtils = {
       let newStatus = (recipients == "") ?
                       "\"" + subject + "\" : " + replyManagerStrings.getString("AllReplied") :
                       "\"" + subject + "\" " + replyManagerStrings.getString("NotAllReplied") + " "
-                      + recipients + " by " + dateStr;
+                      + recipients + " " + replyManagerStrings.getString("DeadlineForReplies") +  " " + dateStr;
       ReplyManagerCalendar.modifyCalendarEvent(aMsgHdr.messageId, newStatus, newDate);
     }
     if (aDateStr) {
@@ -144,6 +146,7 @@ let ReplyManagerUtils = {
    * @param aMsgHdr is the message header associated with this event
    */
   addHdrToCalendar: function ReplyManagerUtils_addHdrToCalendar(aMsgHdr) {
+    let replyManagerStrings = new StringBundle("chrome://replymanager/locale/replyManager.properties");
     let headerParser = MailServices.headerParser;
     // We need to merge the three fields and remove duplicates.
     // To make it simpler, we can create an object and make
@@ -168,9 +171,11 @@ let ReplyManagerUtils = {
     // If we initialized using a whole date string, the date will be 1 less
     // than the real value so we need to separete the values.
     let dateStr = aMsgHdr.getStringProperty("ExpectReplyDate");
+	// Convert to locale date string
+	localeDateStr = (new Date(dateStr)).toLocaleDateString();
     let date = getDateForICalString(dateStr);
-    let status = "\"" + aMsgHdr.subject + "\" is expecting replies from "
-                      + finalRecipients + " by " + dateStr;
+    let status = "\"" + aMsgHdr.subject + "\" " + replyManagerStrings.getString("NotAllReplied")
+                      + finalRecipients + " " + replyManagerStrings.getString("DeadlineForReplies") +  " " + localeDateStr;
     ReplyManagerCalendar.addEvent(date, aMsgHdr.messageId, status);
   },
 

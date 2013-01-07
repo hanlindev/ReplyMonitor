@@ -1,0 +1,54 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this file,
+     You can obtain one at http://mozilla.org/MPL/2.0/.-->
+
+<!-- replyManagerMailWindowOverlay -->
+<!ENTITY replyManagerComposeReminderItem.label "新建提醒">
+<!ENTITY replyManagerMailContextMenu.label "回复管理器">
+<!ENTITY replyManagerExpectReplyCheckbox.label "期待回复">
+<!ENTITY replyManagerModifyExpectReplyItem.label "更改回复期限">
+<!ENTITY replyManagerSendReminderItem.label "发送提醒邮件">
+<!ENTITY viewAllMarkedMessages.label "查看正等待被回复的邮件">
+<!ENTITY viewAllMarkedMessagesButton.label "查看正等待被回复的邮件">
+<!ENTITY viewAllMarkedMessagesButton.tooltip "点击以查看正等待被回复的邮件">
+<!ENTITY markExpectReplyButton.label "Mark Expect-Reply">
+<!ENTITY modifyDeadlineButton.label "更改回复期限">
+<!ENTITY modifyDeadlineButton.tooltip "点击以更改回复期限">
+
+<!-- replyManagerMsgHdrViewOverlay -->
+<!ENTITY allRepliedShowRepliesButton.label "查看回复">
+<!ENTITY allRepliedLabel.value "所有收件人已回复此邮件。">
+<!ENTITY notAllRepliedLabel.value "回复期限">
+<!ENTITY pastDeadlineLabel.value "回复期限已过。">
+<!ENTITY notAllRepliedShowRepliesLabel.value "已回复，">
+<!ENTITY notAllRepliedShowNotRepliedLabel.value "还未回复。">
+<!ENTITY pastDeadlineShowNotRepliedLabel.value "未及时回复。">
+<!ENTITY remindThemButton.label "发送提醒邮件">
+<!ENTITY showRepliesButton.tooltip "点击以查看回复">
+<!ENTITY showNotRepliedButton.tooltip "点击以查看还未回复的收件人">
+<!ENTITY sendReminderButton.tooltip "点击以发送邮件提醒收件人回复">
+<!ENTITY replyManagerMinimonthDropdown.tooltip "点击以更改回复期限">
+
+<!-- messengercompose -->
+<!ENTITY other-elements-toggle.label "回复期限：">
+
+<!-- replyManagerDateDialog -->
+<!ENTITY replyManagerDateDialog.title "回复管理器">
+<!ENTITY replyManagerAcceptButton.label "确定">
+<!ENTITY replyManagerCancelButton.label "取消">
+<!ENTITY replyManagerDateDialogHeader.title "请选择回复期限">
+
+<!-- replyManagerShowAddressDialog -->
+<!ENTITY replyManagerShowAddressDialog.title "回复管理器">
+<!ENTITY replyManagerShowAddressDialogAcceptButton.label "发送提醒邮件">
+<!ENTITY replyManagerShowAddressDialogHeader.title "还未回复的收件人：">
+
+<!-- replyManagerBoilerplateDialog -->
+<!ENTITY replyManagerBoilerplateDialog.title "回复管理器">
+<!ENTITY replyManagerBoilerplateDialogheader.title "提醒邮件模板">
+
+<!-- preference overlay -->
+<!ENTITY paneReplyManager.title "回复管理器">
+<!ENTITY enableReplyManagerGroupbox.label "启用回复管理器">
+<!ENTITY toggleReplyManagerCreateEvent.label "创建日历事件">
+<!ENTITY prefReplyManagerBoilerplate.label "提醒邮件模板">
