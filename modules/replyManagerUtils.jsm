@@ -110,7 +110,7 @@ let ReplyManagerUtils = {
   updateExpectReplyForHdr: function ReplyManagerUtils_updateExpectReplyForHdr(aMsgHdr, aDateStr) {
     let callback = function (aGlodaMessage, aCollection, aRecipientsList) {
       let replyManagerStrings = new StringBundle("chrome://replymanager/locale/replyManager.properties");
-      let subject = aGlodaMessage.subject;
+      let subject = aGlodaMessage.mime2DecodedSubject;
       let recipients = getNotRepliedRecipients(aRecipientsList);
       let dateStr = (aDateStr) ? aDateStr : aMsgHdr.getStringProperty("ExpectReplyDate");
 	  // Convert to locale date string
@@ -174,7 +174,7 @@ let ReplyManagerUtils = {
 	// Convert to locale date string
 	localeDateStr = (new Date(dateStr)).toLocaleDateString();
     let date = getDateForICalString(dateStr);
-    let status = "\"" + aMsgHdr.subject + "\" " + replyManagerStrings.getString("NotAllReplied")
+    let status = "\"" + aMsgHdr.mime2DecodedSubject + "\" " + replyManagerStrings.getString("NotAllReplied")
                       + finalRecipients + " " + replyManagerStrings.getString("DeadlineForReplies") +  " " + localeDateStr;
     ReplyManagerCalendar.addEvent(date, aMsgHdr.messageId, status);
   },

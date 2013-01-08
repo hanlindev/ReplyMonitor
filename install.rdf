@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest">
 
     <em:id>replymanager@lin.han</em:id>
-    <em:version>0.1</em:version>
+    <em:version>0.2</em:version>
     <em:type>2</em:type>
 
     <em:targetApplication>
@@ -21,24 +21,11 @@
     </em:targetApplication>
 
     <!-- Front End MetaData -->
-	<em:localized>
-	  <em:locale>en-US</em:locale>
-      <em:name>Reply Manager</em:name>
-      <em:description>Keep track of your emails and replies</em:description>
-      <em:creator>Han Lin</em:creator>
-	  <em:contributor>protz</em:contributor>
-	  <em:contributor>Fallen</em:contributor>
-	  <em:contributor>Amulya</em:contributor>
-	</em:localized>
-	
-	<em:localized>
-	  <em:locale>zh-CN</em:locale>
-	  <em:name>回复管理器</em:name>
-	  <em:description>追踪针对你的邮件的回复</em:description>
-	  <em:creator>Han Lin</em:creator>
-	  <em:contributor>protz</em:contributor>
-	  <em:contributor>Fallen</em:contributor>
-	  <em:contributor>Amulya</em:contributor>
-	</em:localized>
+    <em:name>Reply Manager</em:name>
+    <em:description>Keep track of your emails and replies</em:description>
+    <em:creator>Han Lin</em:creator>
+	<em:contributor>protz</em:contributor>
+	<em:contributor>Fallen</em:contributor>
+	<em:contributor>Amulya</em:contributor>
   </Description>
 </RDF>
