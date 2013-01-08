@@ -3,7 +3,7 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 Components.utils.import("resource://replymanager/modules/replyManagerUtils.jsm");
 Components.utils.import("resource://replymanager/modules/replyManagerCalendar.jsm");
-Components.utils.import("resource://calendar/modules/calUtils.jsm");
+Components.utils.import("resource://replymanager/modules/calUtils.jsm");
 Components.utils.import("resource:///modules/gloda/public.js");
 Components.utils.import("resource:///modules/gloda/indexer.js");
 Components.utils.import("resource:///modules/mailServices.js");
@@ -52,6 +52,26 @@ var replyManagerMailWindowListener = {
 };
 gMessageListeners.push(replyManagerMailWindowListener);
 
+// Hide/Show the toolbarbuttons when the "reply manager enabled" preference is toggled.
+var replyManagerMailWindowPrefListener = {
+  onLoad: function() {
+    Services.prefs.addObserver("extensions.replymanager.enabled", this, false);
+  },
+  
+  observe: function(subject, topic, data) {
+    if (topic != "nsPref:changed") {
+      return;
+    }
+
+    switch(data)
+    {
+      case "extensions.replymanager.enabled":
+        updateToolbarButtons(gFolderDisplay.selectedMessage);
+        break;
+    }
+  }
+};
+replyManagerMailWindowPrefListener.onLoad();
 //--------------------mailContext menu section----------------------------
 /**
  * startComposeReminder opens the message compose window with some fields filled
@@ -201,9 +221,16 @@ var replyManagerMailListener = {
 
 //----------------------------ToolbarButton Section---------------------
 function updateToolbarButtons(aMsgHdr) {
+  let replyManagerEnabled = cal.getPrefSafe("extensions.replymanager.enabled");
   let strings = new StringBundle("chrome://replymanager/locale/replyManager.properties");
   let markButton = document.getElementById("markExpectReplyButton");
   let modifyButton = document.getElementById("modifyDeadlineButton");
+  let viewButton = document.getElementById("viewAllMarkedMessagesButton");
+  
+  markButton.collapsed = !replyManagerEnabled;
+  modifyButton.collapsed = !replyManagerEnabled;
+  viewButton.collapsed = !replyManagerEnabled;
+  
   if (aMsgHdr &&
       cal.getPrefSafe("extensions.replymanager.enabled", false) &&
       GlodaIndexer.enabled) {

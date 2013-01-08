@@ -11,7 +11,6 @@ const ReplyManager = "ReplyManager";
 
 Cu.import("resource://gre/modules/errUtils.js");
 Cu.import("resource://gre/modules/Services.jsm");
-Cu.import("resource://calendar/modules/calUtils.jsm");
 Cu.import("resource:///modules/gloda/public.js");
 Cu.import("resource:///modules/gloda/index_msg.js");
 Cu.import("resource:///modules/StringBundle.js");
@@ -28,10 +27,23 @@ let ReplyManagerCalendar = {
    */
   initCalendar: function()
   {
+    try {
+	  Cu.import("resource://calendar/modules/calUtils.jsm");
+	} catch(e) {
+	  // If Lightning is not installed, disable the feature
+	  this.disableReplyManager();
+	  return;
+	}
     let calendarID = cal.getPrefSafe("calendar.replymanager.calendarID");
     this.ensureHasCalendar();
     ReplyManagerCalendarManagerObserver.init();
     ReplyManagerCalendarObserver.init();
+  },
+
+  disableReplyManager: function() {
+    let prefBranch = Cc["@mozilla.org/preferences-service;1"]
+	  .getService(Components.interfaces.nsIPrefBranch);
+	prefBranch.setBoolPref("extensions.replymanager.enabled", false);
   },
 
   /**

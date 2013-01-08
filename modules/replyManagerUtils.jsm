@@ -10,10 +10,12 @@ const Ci = Components.interfaces;
 
 Cu.import("resource:///modules/gloda/public.js");
 Cu.import("resource://replymanager/modules/replyManagerCalendar.jsm");
-Cu.import("resource://calendar/modules/calUtils.jsm");
 Cu.import("resource:///modules/mailServices.js");
 Cu.import("resource:///modules/gloda/index_msg.js");
 Cu.import("resource:///modules/StringBundle.js");
+try {
+  Cu.import("resource://calendar/modules/calUtils.jsm");
+} catch(e) {} 
 
 let ReplyManagerUtils = {
   /**
