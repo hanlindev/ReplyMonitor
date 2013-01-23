@@ -227,12 +227,6 @@ function updateToolbarButtons(aMsgHdr) {
   let modifyButton = document.getElementById("modifyDeadlineButton");
   let viewButton = document.getElementById("viewAllMarkedMessagesButton");
   
-  // If the user has not moved any of these toolbar buttons out of the storage, we won't need
-  // to update them so break from here.
-  if (markButton == null) {
-    return;
-  }
-  
   markButton.collapsed = !replyManagerEnabled;
   modifyButton.collapsed = !replyManagerEnabled;
   viewButton.collapsed = !replyManagerEnabled;
