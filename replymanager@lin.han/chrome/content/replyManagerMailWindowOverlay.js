@@ -227,6 +227,20 @@ function updateToolbarButtons(aMsgHdr) {
   let modifyButton = document.getElementById("modifyDeadlineButton");
   let viewButton = document.getElementById("viewAllMarkedMessagesButton");
   
+  // When the user has not moved the buttons out of the storage, these objects will be null,
+  // in which case there will be errors. Therefore this dummy object is created to prevent
+  // those errors and avoid using excessive checking
+  let dummyObj = {
+    collapsed: true,
+	setAttribute: function(str1, str2) {
+	  // This is completely no use :P
+	},
+  };
+  markButton = (markButton == null) ? dummyObj : markButton;
+  modifyButton = (modifyButton == null) ? dummyObj : modifyButton;
+  viewButton = (viewButton == null) ? dummyObj : viewButton;
+  
+  
   markButton.collapsed = !replyManagerEnabled;
   modifyButton.collapsed = !replyManagerEnabled;
   viewButton.collapsed = !replyManagerEnabled;
