@@ -20,6 +20,8 @@
       </Description>
     </em:targetApplication>
 
+	<em:optionsURL>chrome://replymanager/content/replyManagerPreferences.xul</em:optionsURL>
+
     <!-- Front End MetaData -->
     <em:name>Reply Manager</em:name>
     <em:description>Keep track of your emails and replies</em:description>

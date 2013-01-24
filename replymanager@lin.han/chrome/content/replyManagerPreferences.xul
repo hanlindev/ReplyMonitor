@@ -2,16 +2,16 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://replymanager/skin/replyManager.css"?>
-<!DOCTYPE overlay [
-    <!ENTITY % replyManagerDTD SYSTEM "chrome://replymanager/locale/replyManager.dtd">
-    %replyManagerDTD;
-]>
+<!DOCTYPE window SYSTEM "chrome://replymanager/locale/replyManager.dtd">
 
-<overlay id="ReplyManagerPaneOverlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
-  <vbox id="calPreferencesBoxReplyManager">
+<prefwindow id="ReplyManagerPaneOverlay"
+            title="Reply Manager Preferences"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<prefpane id="ReplyManagerPrefPane"
+          label="Reply Manager Options">
+  <vbox id="calPreferencesBoxReplyManager" class="replyManagerPrefpaneBox">
     <script type="application/javascript"
             src="chrome://replymanager/content/replyManagerPreferences.js"/>
     <preferences>
@@ -42,5 +42,5 @@
              height="300"
              preference="extensions.replymanager.boilerplate"/>
   </vbox>
-
-</overlay>
+</prefpane>
+</prefwindow>
