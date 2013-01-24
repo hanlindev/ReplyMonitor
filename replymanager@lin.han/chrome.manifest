@@ -1,6 +1,5 @@
 content replymanager chrome/content/
 locale replymanager en-US chrome/locales/en-US/
-locale replymanager zh-CN chrome/locales/zh-CN/
 skin replymanager classic/1.0 chrome/skin/
 resource replymanager .
 
