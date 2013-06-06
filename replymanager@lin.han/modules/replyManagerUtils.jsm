@@ -40,10 +40,29 @@ let ReplyManagerUtils = {
         }
 
         let recipients = [];
+        // ccList and bccList will help us identify cc and bcc mailboxes so that we can filter them out if necessary
+        let ccList = {};
+        let bccList = {};
+        let getList = function(aList) {
+          let rvList = {};
+          for each (let address in aList) {
+            let addressValue = address.value;
+            rvList[addressValue] = true;
+          }
+          return rvList;
+        }
+        ccList = getList(aGlodaMsg.cc);
+        bccList = getList(aGlodaMsg.bcc);
+
+        let includeCC = cal.getPrefSafe("extensions.replymanager.includecc", true);
+        let includeBCC = cal.getPrefSafe("extensions.replymanager.includebcc", true);
+        let counter = 0;
         for (let i = 0; i < aGlodaMsg.recipients.length; ++i) {
           let address = aGlodaMsg.recipients[i].value;
-          let didReply = aCollection.items.some(function(aItem) aItem.from.value == address);
-          recipients[i] = new recipient(address, didReply);
+          if (!(ccList[address] && !includeCC) && !(bccList[address] && !includeBCC)) {
+            let didReply = aCollection.items.some(function(aItem) aItem.from.value == address);
+            recipients[counter++] = new recipient(address, didReply);
+          }
         }
 
         callback(aGlodaMsg, aCollection, recipients);
@@ -112,7 +131,7 @@ let ReplyManagerUtils = {
   updateExpectReplyForHdr: function ReplyManagerUtils_updateExpectReplyForHdr(aMsgHdr, aDateStr) {
     let callback = function (aGlodaMessage, aCollection, aRecipientsList) {
       let replyManagerStrings = new StringBundle("chrome://replymanager/locale/replyManager.properties");
-      let subject = aGlodaMessage.mime2DecodedSubject;
+      let subject = aMsgHdr.mime2DecodedSubject;
       let recipients = getNotRepliedRecipients(aRecipientsList);
       let dateStr = (aDateStr) ? aDateStr : aMsgHdr.getStringProperty("ExpectReplyDate");
 	  // Convert to locale date string
@@ -124,7 +143,7 @@ let ReplyManagerUtils = {
       // In that case we need to give the event a more meaningful title.
       let newStatus = (recipients == "") ?
                       "\"" + subject + "\" : " + replyManagerStrings.getString("AllReplied") :
-                      "\"" + subject + "\" " + replyManagerStrings.getString("NotAllReplied") + " "
+                      "\"" + subject + "\" : " + replyManagerStrings.getString("NotAllReplied") + " "
                       + recipients + " " + replyManagerStrings.getString("DeadlineForReplies") +  " " + dateStr;
       ReplyManagerCalendar.modifyCalendarEvent(aMsgHdr.messageId, newStatus, newDate);
     }
@@ -166,8 +185,12 @@ let ReplyManagerUtils = {
       }
     };
     mergeFunction(aMsgHdr.recipients);
-    mergeFunction(aMsgHdr.ccList);
-    mergeFunction(aMsgHdr.bccList);
+    if (cal.getPrefSafe("extensions.replymanager.includecc", true)) {
+      mergeFunction(aMsgHdr.ccList);
+    }
+    if (cal.getPrefSafe("extensions.replymanager.includebcc", true)) {
+      mergeFunction(aMsgHdr.bccList);
+    }
     let finalRecipients = Object.getOwnPropertyNames(recipients);
 
     // If we initialized using a whole date string, the date will be 1 less

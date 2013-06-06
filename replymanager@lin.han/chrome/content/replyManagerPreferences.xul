@@ -25,6 +25,12 @@
       <preference id="extensions.replymanager.boilerplate"
                   name="extensions.replymanager.boilerplate"
                   type="string"/>
+      <preference id="extensions.replymanager.includecc"
+                  name="extensions.replymanager.includecc"
+                  type="bool"/>
+      <preference id="extensions.replymanager.includebcc"
+                  name="extensions.replymanager.includebcc"
+                  type="bool"/>
     </preferences>
 
 
@@ -35,7 +41,15 @@
     <checkbox id="toggleReplyManagerCreateEvent"
               label="&toggleReplyManagerCreateEvent.label;"
               preference="extensions.replymanager.create_calendar_event_enabled"/>
-
+    
+    <checkbox id="toggleReplyManagerIncludeCC"
+              label="&toggleReplyManagerIncludeCC.label;"
+              preference="extensions.replymanager.includecc"/>
+    
+    <checkbox id="toggleReplyManagerIncludeBCC"
+              label="&toggleReplyManagerIncludeBCC.label;"
+              preference="extensions.replymanager.includebcc"/>
+    
     <caption label="&prefReplyManagerBoilerplate.label;"/>
     <textbox id="reminderBoilerplateTextbox" multiline="true"
              newlines="pasteintact" flex="1"

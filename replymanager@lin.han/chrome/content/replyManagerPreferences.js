@@ -12,6 +12,10 @@ var gReplyManagerPane = {
 
   enableCreateCalendarEventCheckbox: null,
 
+  enableIncludeCCCheckbox: null,
+
+  enableIncludeBCCCheckbox: null,
+
   reminderBoilerplateTextbox: null,
 
   /**
@@ -21,17 +25,29 @@ var gReplyManagerPane = {
   init: function() {
     this.enableReplyManagerCheckbox =
       document.getElementById("enableReplyManagerCheckbox");
-	this.enableReplyManagerCheckbox.checked =
-	  cal.getPrefSafe("extensions.replymanager.enabled", true);
+  	this.enableReplyManagerCheckbox.checked =
+  	  cal.getPrefSafe("extensions.replymanager.enabled", true);
+    
     this.enableCreateCalendarEventCheckbox =
       document.getElementById("toggleReplyManagerCreateEvent");
-	this.enableCreateCalendarEventCheckbox.checked =
-	  cal.getPrefSafe("extensions.replymanager.create_calendar_event_enabled", true);
+  	this.enableCreateCalendarEventCheckbox.checked =
+  	  cal.getPrefSafe("extensions.replymanager.create_calendar_event_enabled", true);
+    
+    this.enableIncludeCCCheckbox =
+      document.getElementById("toggleReplyManagerIncludeCC");
+    this.enableIncludeCCCheckbox.checked =
+      cal.getPrefSafe("extensions.replymanager.includecc", true);
+
+    this.enableIncludeBCCCheckbox =
+      document.getElementById("toggleReplyManagerIncludeBCC");
+    this.enableIncludeBCCCheckbox.checked =
+      cal.getPrefSafe("extensions.replymanager.includebcc", true);
+
     this.reminderBoilerplateTextbox =
       document.getElementById("reminderBoilerplateTextbox");
-	this.reminderBoilerplateTextbox.value = 
-	  cal.getPrefSafe("extensions.replymanager.boilerplate", "");
-    this.enableElements(this.enableReplyManagerCheckbox.checked);
+  	this.reminderBoilerplateTextbox.value = 
+  	  cal.getPrefSafe("extensions.replymanager.boilerplate", "");
+      this.enableElements(this.enableReplyManagerCheckbox.checked);
   },
 
   toggleReplyManagerEnabled: function() {

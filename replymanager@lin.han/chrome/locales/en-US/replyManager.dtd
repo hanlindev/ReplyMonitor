@@ -52,3 +52,5 @@
 <!ENTITY enableReplyManagerGroupbox.label "Enable Reply Manager">
 <!ENTITY toggleReplyManagerCreateEvent.label "Create Calendar Event">
 <!ENTITY prefReplyManagerBoilerplate.label "Reminder Boilerplate">
+<!ENTITY toggleReplyManagerIncludeCC.label "Expect CCs to reply">
+<!ENTITY toggleReplyManagerIncludeBCC.label "Expect BCCs to reply">
