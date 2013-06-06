@@ -27,10 +27,12 @@
                   type="string"/>
       <preference id="extensions.replymanager.includecc"
                   name="extensions.replymanager.includecc"
-                  type="bool"/>
+                  type="bool"
+                  onchange="gReplyManagerPane.CcBccChanged();"/>
       <preference id="extensions.replymanager.includebcc"
                   name="extensions.replymanager.includebcc"
-                  type="bool"/>
+                  type="bool"
+                  onchange="gReplyManagerPane.CcBccChanged();"/>
     </preferences>
 
 

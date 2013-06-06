@@ -218,6 +218,8 @@ var replyManagerHdrViewWidget = {
     onLoad: function()
     {
       Services.prefs.addObserver("extensions.replymanager.enabled", this, false);
+      Services.prefs.addObserver("extensions.replymanager.includecc", this, false);
+      Services.prefs.addObserver("extensions.replymanager.includebcc", this, false);
       //Enable/disable items on startup
       this.enableItems();
     },
@@ -225,6 +227,8 @@ var replyManagerHdrViewWidget = {
     onUnload: function()
     {
       Services.prefs.removeObserver("extensions.replymanager.enabled", this);
+      Services.prefs.removeObserver("extensions.replymanager.includecc", this, false);
+      Services.prefs.removeObserver("extensions.replymanager.includebcc", this, false);
     },
 
     observe: function(subject, topic, data)
@@ -239,6 +243,25 @@ var replyManagerHdrViewWidget = {
         case "extensions.replymanager.enabled":
           this.enableItems();
           replyManagerHdrViewWidget.hdrViewDeployItems();
+          break;
+        case "extensions.replymanager.includecc":
+        case "extensions.replymanager.includebcc":
+          if (ReplyManagerUtils.CcBccChanged) {
+            ReplyManagerUtils.CcBccChanged = false;
+            // Update all calendar events
+            let query = Gloda.newQuery(Gloda.NOUN_MESSAGE);
+            query.isExpectReply(true);
+            let queryCollection = query.getCollection({
+              onItemsAdded: function() {},
+              onItemsRemoved: function() {},
+              onItemsModified: function() {},
+              onQueryCompleted: function(aCollection) {                
+                for each (msg in aCollection.items) {
+                  ReplyManagerUtils.updateExpectReplyForHdr(msg.folderMessage);
+                }
+              },
+            });
+          }
           break;
       }
     }

@@ -18,6 +18,7 @@ try {
 } catch(e) {} 
 
 let ReplyManagerUtils = {
+  CcBccSettingChanged: false,
   /**
    * Get the list of email addresses who have not replied to the message
    * @param aGlodaMsg
@@ -131,11 +132,11 @@ let ReplyManagerUtils = {
   updateExpectReplyForHdr: function ReplyManagerUtils_updateExpectReplyForHdr(aMsgHdr, aDateStr) {
     let callback = function (aGlodaMessage, aCollection, aRecipientsList) {
       let replyManagerStrings = new StringBundle("chrome://replymanager/locale/replyManager.properties");
-      let subject = aMsgHdr.mime2DecodedSubject;
+      let subject = aGlodaMessage.folderMessage.mime2DecodedSubject;
       let recipients = getNotRepliedRecipients(aRecipientsList);
       let dateStr = (aDateStr) ? aDateStr : aMsgHdr.getStringProperty("ExpectReplyDate");
-	  // Convert to locale date string
-	  dateStr = (new Date(dateStr)).toLocaleDateString();
+  	  // Convert to locale date string
+  	  dateStr = (new Date(dateStr)).toLocaleDateString();
       let newDate = (aDateStr) ? getDateForICalString(aDateStr)
                                : null;
 

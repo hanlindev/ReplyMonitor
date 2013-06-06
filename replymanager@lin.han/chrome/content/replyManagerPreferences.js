@@ -3,6 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+Components.utils.import("resource://replymanager/modules/replyManagerUtils.jsm");
 
 /**
  * Global Object to hold methods for the Reply Manager pref pane
@@ -52,6 +53,10 @@ var gReplyManagerPane = {
 
   toggleReplyManagerEnabled: function() {
     this.enableElements(this.enableReplyManagerCheckbox.checked);
+  },
+
+  CcBccChanged: function() {
+    ReplyManagerUtils.CcBccChanged = true;
   },
 
   enableElements: function(aEnabled) {
