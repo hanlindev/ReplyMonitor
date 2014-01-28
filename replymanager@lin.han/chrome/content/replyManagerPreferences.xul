@@ -7,10 +7,10 @@
 <!DOCTYPE window SYSTEM "chrome://replymanager/locale/replyManager.dtd">
 
 <prefwindow id="ReplyManagerPaneOverlay"
-            title="Reply Manager Preferences"
+            title="Reply Monitor Preferences"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <prefpane id="ReplyManagerPrefPane"
-          label="Reply Manager Options">
+          label="Reply Monitor Options">
   <vbox id="calPreferencesBoxReplyManager" class="replyManagerPrefpaneBox">
     <script type="application/javascript"
             src="chrome://replymanager/content/replyManagerPreferences.js"/>
@@ -43,15 +43,15 @@
     <checkbox id="toggleReplyManagerCreateEvent"
               label="&toggleReplyManagerCreateEvent.label;"
               preference="extensions.replymanager.create_calendar_event_enabled"/>
-    
+
     <checkbox id="toggleReplyManagerIncludeCC"
               label="&toggleReplyManagerIncludeCC.label;"
               preference="extensions.replymanager.includecc"/>
-    
+
     <checkbox id="toggleReplyManagerIncludeBCC"
               label="&toggleReplyManagerIncludeBCC.label;"
               preference="extensions.replymanager.includebcc"/>
-    
+
     <caption label="&prefReplyManagerBoilerplate.label;"/>
     <textbox id="reminderBoilerplateTextbox" multiline="true"
              newlines="pasteintact" flex="1"

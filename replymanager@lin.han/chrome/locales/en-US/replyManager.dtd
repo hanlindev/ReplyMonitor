@@ -4,7 +4,7 @@
 
 <!-- replyManagerMailWindowOverlay -->
 <!ENTITY replyManagerComposeReminderItem.label "Compose Reminder">
-<!ENTITY replyManagerMailContextMenu.label "Reply Manager">
+<!ENTITY replyManagerMailContextMenu.label "Reply Monitor">
 <!ENTITY replyManagerExpectReplyCheckbox.label "Expect Reply">
 <!ENTITY replyManagerModifyExpectReplyItem.label "Change Reply Deadline">
 <!ENTITY replyManagerSendReminderItem.label "Send Reminder">
@@ -33,23 +33,23 @@
 <!ENTITY other-elements-toggle.label "Expecting replies by ">
 
 <!-- replyManagerDateDialog -->
-<!ENTITY replyManagerDateDialog.title "Reply Manager">
+<!ENTITY replyManagerDateDialog.title "Reply Monitor">
 <!ENTITY replyManagerAcceptButton.label "Save">
 <!ENTITY replyManagerCancelButton.label "Cancel">
 <!ENTITY replyManagerDateDialogHeader.title "Pick a deadline:">
 
 <!-- replyManagerShowAddressDialog -->
-<!ENTITY replyManagerShowAddressDialog.title "Reply Manager">
+<!ENTITY replyManagerShowAddressDialog.title "Reply Monitor">
 <!ENTITY replyManagerShowAddressDialogAcceptButton.label "Send Reminder">
 <!ENTITY replyManagerShowAddressDialogHeader.title "Expecting replies from:">
 
 <!-- replyManagerBoilerplateDialog -->
-<!ENTITY replyManagerBoilerplateDialog.title "Reply Manager">
+<!ENTITY replyManagerBoilerplateDialog.title "Reply Monitor">
 <!ENTITY replyManagerBoilerplateDialogheader.title "Reminder boilerplate:">
 
 <!-- preference overlay -->
-<!ENTITY paneReplyManager.title "Reply Manager">
-<!ENTITY enableReplyManagerGroupbox.label "Enable Reply Manager">
+<!ENTITY paneReplyManager.title "Reply Monitor">
+<!ENTITY enableReplyManagerGroupbox.label "Enable Reply Monitor">
 <!ENTITY toggleReplyManagerCreateEvent.label "Create Calendar Event">
 <!ENTITY prefReplyManagerBoilerplate.label "Reminder Boilerplate">
 <!ENTITY toggleReplyManagerIncludeCC.label "Expect CCs to reply">
