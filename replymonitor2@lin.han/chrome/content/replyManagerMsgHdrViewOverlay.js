@@ -6,6 +6,7 @@ Components.utils.import("resource://replymanager/modules/calUtils.jsm");
 Components.utils.import("resource:///modules/StringBundle.js");
 Components.utils.import("resource:///modules/Services.jsm");
 Components.utils.import("resource:///modules/gloda/indexer.js");
+Components.utils.import("resource://gre/modules/Preferences.jsm");
 
 var replyManagerHdrViewListener = {
   displayedMessage: null,
@@ -80,7 +81,7 @@ function hdrViewModifyExpectReply() {
 function showNotReplied() {
   let openDialogFunction = function(aGlodaMsg, aCollection, recipients) {
     let addressList = [];
-    for each(let [i, recipient] in Iterator(recipients)) {
+    for (let [_, recipient] of Iterator(recipients)) {
       if (!recipient.didReply)
         addressList.push(recipient.address);
     }
@@ -207,7 +208,7 @@ var replyManagerHdrViewWidget = {
    */
   replyManagerMsgHdrViewPrefObserver: {
     enableItems: function() {
-      let enabled = cal.getPrefSafe("extensions.replymanager.enabled", false)
+      let enabled = Preferences.get("extensions.replymanager.enabled", false)
                   & GlodaIndexer.enabled;
       replyManagerHdrViewWidget.expectReplyCheckbox.collapsed = !enabled;
       replyManagerHdrViewWidget.modifyItem.collapsed = !enabled;
@@ -255,8 +256,8 @@ var replyManagerHdrViewWidget = {
               onItemsAdded: function() {},
               onItemsRemoved: function() {},
               onItemsModified: function() {},
-              onQueryCompleted: function(aCollection) {                
-                for each (msg in aCollection.items) {
+              onQueryCompleted: function(aCollection) {
+                for (let msg of aCollection.items) {
                   ReplyManagerUtils.updateExpectReplyForHdr(msg.folderMessage);
                 }
               },
@@ -274,7 +275,7 @@ var replyManagerHdrViewWidget = {
   hdrViewDeployItems: function() {
     let msgHdr = replyManagerHdrViewListener.displayedMessage;
     // If ReplyManager is disabled we should not show either of the boxes.
-    if(!cal.getPrefSafe("extensions.replymanager.enabled", false) ||
+    if(!Preferences.get("extensions.replymanager.enabled", false) ||
        !GlodaIndexer.enabled ||
        !Gloda.isMessageIndexed(msgHdr)) {
       this.replyManagerMsgHdrViewBox.collapsed = true;

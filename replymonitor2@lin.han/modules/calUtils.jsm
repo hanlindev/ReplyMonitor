@@ -22,15 +22,15 @@ var cal = {
    */
   getPrefSafe: function(prefName) {
     let prefBranch = Cc["@mozilla.org/preferences-service;1"]
-	  .getService(Ci.nsIPrefBranch);
-	let prefType = prefBranch.getPrefType(prefName);
-	switch(prefType) {
-	  case prefBranch.PREF_STRING:
-	    return prefBranch.getCharPref(prefName);
-	  case prefBranch.PREF_INT:
-	    return prefBranch.getIntPref(prefName);
-	  case prefBranch.PREF_BOOL:
-	    return prefBranch.getBoolPref(prefName);
-	}
+			.getService(Ci.nsIPrefBranch);
+		let prefType = prefBranch.getPrefType(prefName);
+		switch(prefType) {
+			case prefBranch.PREF_STRING:
+				return prefBranch.getCharPref(prefName);
+			case prefBranch.PREF_INT:
+				return prefBranch.getIntPref(prefName);
+			case prefBranch.PREF_BOOL:
+				return prefBranch.getBoolPref(prefName);
+		}
   },
 };

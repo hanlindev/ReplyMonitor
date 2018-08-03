@@ -4,10 +4,11 @@
 Components.utils.import("resource://replymanager/modules/replyManagerUtils.jsm");
 Components.utils.import("resource://replymanager/modules/calUtils.jsm");
 Components.utils.import("resource:///modules/gloda/indexer.js");
+Components.utils.import("resource://gre/modules/Preferences.jsm");
 
 function onLoad() {
   // We need both ReplyManager and Gloda indexer enabled to make this feature work.
-  let enabled = cal.getPrefSafe("extensions.replymanager.enabled") &
+  let enabled = Preferences.get("extensions.replymanager.enabled") &
                 GlodaIndexer.enabled;
   let replymanagerhbox = document.getElementById("replymanager-hbox");
   if (enabled) {

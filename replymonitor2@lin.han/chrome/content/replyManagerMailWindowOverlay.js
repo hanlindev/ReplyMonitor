@@ -8,11 +8,12 @@ Components.utils.import("resource:///modules/gloda/public.js");
 Components.utils.import("resource:///modules/gloda/indexer.js");
 Components.utils.import("resource:///modules/mailServices.js");
 Components.utils.import("resource:///modules/Services.jsm");
+Components.utils.import("resource://gre/modules/Preferences.jsm");
 
 function onLoad() {
   let replyManagerMenu = document.getElementById("replyManagerMailContextMenu");
   let replyManagerMessageMenu = document.getElementById("replyManagerMessageMenu");
-  let enabled = cal.getPrefSafe("extensions.replymanager.enabled", false);
+  let enabled = Preferences.get("extensions.replymanager.enabled", false);
   replyManagerMenu.hidden = !enabled;
   replyManagerMessageMenu.hidden = !enabled;
 
@@ -25,14 +26,14 @@ function onLoad() {
   document.getElementById("mailContext")
           .addEventListener("popupshowing", function() {
     replyManagerMenu.hidden = ((gFolderDisplay.selectedMessage == null) |
-     !cal.getPrefSafe("extensions.replymanager.enabled", false) |
+     !Preferences.get("extensions.replymanager.enabled", false) |
      !GlodaIndexer.enabled);
   });
 
   //Add a similar event listener to the Message menu
   document.getElementById("messageMenuPopup")
           .addEventListener("popupshowing", function() {
-    replyManagerMessageMenu.hidden = (!cal.getPrefSafe("extensions.replymanager.enabled", false) |
+    replyManagerMessageMenu.hidden = (!Preferences.get("extensions.replymanager.enabled", false) |
       !GlodaIndexer.enabled);
     // The ReplyManager menu in the message menu is not hidden when no message
     // is selected but disabled instead
@@ -57,7 +58,7 @@ var replyManagerMailWindowPrefListener = {
   onLoad: function() {
     Services.prefs.addObserver("extensions.replymanager.enabled", this, false);
   },
-  
+
   observe: function(subject, topic, data) {
     if (topic != "nsPref:changed") {
       return;
@@ -176,7 +177,7 @@ var replyManagerMailListener = {
       onItemsModified: function() {},
       onItemsRemoved: function() {},
       onQueryCompleted: function(aCollection) {
-        for each (let [i, msg] in Iterator(aCollection.items)) {
+        for (let [i, msg] in Iterator(aCollection.items)) {
           if (ReplyManagerUtils.isHdrExpectReply(msg.folderMessage)) {
             // Update the calendar event
             ReplyManagerUtils.updateExpectReplyForHdr(msg.folderMessage);
@@ -221,12 +222,12 @@ var replyManagerMailListener = {
 
 //----------------------------ToolbarButton Section---------------------
 function updateToolbarButtons(aMsgHdr) {
-  let replyManagerEnabled = cal.getPrefSafe("extensions.replymanager.enabled");
+  let replyManagerEnabled = Preferences.get("extensions.replymanager.enabled");
   let strings = new StringBundle("chrome://replymanager/locale/replyManager.properties");
   let markButton = document.getElementById("markExpectReplyButton");
   let modifyButton = document.getElementById("modifyDeadlineButton");
   let viewButton = document.getElementById("viewAllMarkedMessagesButton");
-  
+
   // When the user has not moved the buttons out of the storage, these objects will be null,
   // in which case there will be errors. Therefore this dummy object is created to prevent
   // those errors and avoid using excessive checking
@@ -239,14 +240,14 @@ function updateToolbarButtons(aMsgHdr) {
   markButton = (markButton == null) ? dummyObj : markButton;
   modifyButton = (modifyButton == null) ? dummyObj : modifyButton;
   viewButton = (viewButton == null) ? dummyObj : viewButton;
-  
-  
+
+
   markButton.collapsed = !replyManagerEnabled;
   modifyButton.collapsed = !replyManagerEnabled;
   viewButton.collapsed = !replyManagerEnabled;
-  
+
   if (aMsgHdr &&
-      cal.getPrefSafe("extensions.replymanager.enabled", false) &&
+      Preferences.get("extensions.replymanager.enabled", false) &&
       GlodaIndexer.enabled) {
     if (ReplyManagerUtils.isHdrExpectReply(aMsgHdr)) {
       // This message is marked, we need to set the icon and label of the

@@ -14,6 +14,7 @@ Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource:///modules/gloda/public.js");
 Cu.import("resource:///modules/gloda/index_msg.js");
 Cu.import("resource:///modules/StringBundle.js");
+Cu.import("resource://gre/modules/Preferences.jsm");
 
 /**
  * ReplyManagerCalendar
@@ -34,7 +35,7 @@ let ReplyManagerCalendar = {
 	  this.disableReplyManager();
 	  return;
 	}
-    let calendarID = cal.getPrefSafe("calendar.replymanager.calendarID");
+    let calendarID = Preferences.get("calendar.replymanager.calendarID");
     this.ensureHasCalendar();
     ReplyManagerCalendarManagerObserver.init();
     ReplyManagerCalendarObserver.init();
@@ -77,7 +78,7 @@ let ReplyManagerCalendar = {
       }
     };
 
-    let calendarID = cal.getPrefSafe("calendar.replymanager.calendarID", "");
+    let calendarID = Preferences.get("calendar.replymanager.calendarID", "");
     // Get the calendar with the calendarID. If the ID is an empty string,
     // the calendar does not exists. So create one.
     if (calendarID != "") {

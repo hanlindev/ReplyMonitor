@@ -101,7 +101,7 @@
   </vbox>
 
   <menupopup id="otherActionsPopup">
-    <menuseparator id="replyManagerHdrViewSep" position="6"/>
+    <menuseparator id="replyManagerHdrViewSep" position="7"/>
     <menuitem id="hdrViewExpectReplyCheckbox" label="&replyManagerExpectReplyCheckbox.label;"
               type="checkbox"
               autocheck="false" command="cmd_hdrViewToggleExpectReply" position="7"/>

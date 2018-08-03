@@ -8,14 +8,20 @@ const Cu = Components.utils;
 const Cc = Components.classes;
 const Ci = Components.interfaces;
 
+const consoleService = Cc["@mozilla.org/consoleservice;1"]
+  .getService(Ci.nsIConsoleService);
+
 Cu.import("resource:///modules/gloda/public.js");
 Cu.import("resource://replymanager/modules/replyManagerCalendar.jsm");
 Cu.import("resource:///modules/mailServices.js");
 Cu.import("resource:///modules/gloda/index_msg.js");
 Cu.import("resource:///modules/StringBundle.js");
+Cu.import("resource://gre/modules/Preferences.jsm");
 try {
   Cu.import("resource://calendar/modules/calUtils.jsm");
-} catch(e) {} 
+} catch(e) {
+  consoleService.logStringMessage('Lightning not installed');
+}
 
 let ReplyManagerUtils = {
   CcBccSettingChanged: false,
@@ -46,7 +52,7 @@ let ReplyManagerUtils = {
         let bccList = {};
         let getList = function(aList) {
           let rvList = {};
-          for each (let address in aList) {
+          for (let address of aList) {
             let addressValue = address.value;
             rvList[addressValue] = true;
           }
@@ -55,15 +61,22 @@ let ReplyManagerUtils = {
         ccList = getList(aGlodaMsg.cc);
         bccList = getList(aGlodaMsg.bcc);
 
-        let includeCC = cal.getPrefSafe("extensions.replymanager.includecc", true);
-        let includeBCC = cal.getPrefSafe("extensions.replymanager.includebcc", true);
+        let includeCC = Preferences.get("extensions.replymanager.includecc", true);
+        let includeBCC = Preferences.get("extensions.replymanager.includebcc", true);
         let counter = 0;
+        let registeredAddresses = new Set();
         for (let i = 0; i < aGlodaMsg.recipients.length; ++i) {
           let address = aGlodaMsg.recipients[i].value;
+          if (registeredAddresses.has(address)) {
+            continue;
+          }
+
           if (!(ccList[address] && !includeCC) && !(bccList[address] && !includeBCC)) {
-            let didReply = aCollection.items.some(function(aItem) aItem.from.value == address);
+            let didReply = aCollection.items.some(aItem => aItem.from.value == address);
             recipients[counter++] = new recipient(address, didReply);
           }
+
+          registeredAddresses.add(address);
         }
 
         callback(aGlodaMsg, aCollection, recipients);
@@ -103,7 +116,7 @@ let ReplyManagerUtils = {
   {
     markHdrExpectReply(aMsgHdr, true, aDateStr);
 
-    if (cal.getPrefSafe("extensions.replymanager.create_calendar_event_enabled", false))
+    if (Preferences.get("extensions.replymanager.create_calendar_event_enabled", false))
       ReplyManagerUtils.addHdrToCalendar(aMsgHdr);
   },
 
@@ -151,7 +164,7 @@ let ReplyManagerUtils = {
     if (aDateStr) {
       aMsgHdr.setStringProperty("ExpectReplyDate", aDateStr);
     }
-    if (cal.getPrefSafe("extensions.replymanager.create_calendar_event_enabled", false))
+    if (Preferences.get("extensions.replymanager.create_calendar_event_enabled", false))
       ReplyManagerUtils.getNotRepliedForHdr(aMsgHdr, callback);
   },
 
@@ -179,17 +192,17 @@ let ReplyManagerUtils = {
       if (addressStr != "") {
         let addressListObj = {};
         headerParser.parseHeadersWithArray(addressStr, addressListObj, {}, {});
-        for each (let recipient in addressListObj.value) {
+        for (let recipient of addressListObj.value) {
           //Let's make the address the name of the property
           recipients[recipient] = true;
         }
       }
     };
     mergeFunction(aMsgHdr.recipients);
-    if (cal.getPrefSafe("extensions.replymanager.includecc", true)) {
+    if (Preferences.get("extensions.replymanager.includecc", true)) {
       mergeFunction(aMsgHdr.ccList);
     }
-    if (cal.getPrefSafe("extensions.replymanager.includebcc", true)) {
+    if (Preferences.get("extensions.replymanager.includebcc", true)) {
       mergeFunction(aMsgHdr.bccList);
     }
     let finalRecipients = Object.getOwnPropertyNames(recipients);
@@ -215,7 +228,7 @@ let ReplyManagerUtils = {
 
   openComposeWindow: function ReplyManagerUtils_openComposeWindow(aGlodaMsg, aCollection, aRecipientsList) {
     let recipients = getNotRepliedRecipients(aRecipientsList);
-    let boilerplate = cal.getPrefSafe("extensions.replymanager.boilerplate");
+    let boilerplate = Preferences.get("extensions.replymanager.boilerplate");
 
     cal.sendMailTo(recipients, aGlodaMsg.subject, boilerplate);
   }
@@ -259,8 +272,12 @@ function indexMessage(aMsgHdr) {
 }
 
 function getNotRepliedRecipients(aRecipientsList) {
-  return recipients = [recipient.address for each ([i, recipient] in Iterator(aRecipientsList))
-    if (!recipient.didReply)].join(",");
+  // return recipients = [recipient.address for each ([i, recipient] in Iterator(aRecipientsList))
+  //   if (!recipient.didReply)].join(",");
+  const recipients = aRecipientsList
+    .filter(recipient => !recipient.didReply)
+    .map(recipient => recipient.address);
+  return recipients.join(',');
 }
 
 //Remove the '-' in the date string to get a date string used by iCalString
@@ -298,7 +315,7 @@ let isExpectReply = {
     });
   },
 
-  process: function(aGlodaMessage, aRawReps, aIsNew, aCallbackHandle) {
+  process: function*(aGlodaMessage, aRawReps, aIsNew, aCallbackHandle) {
     aGlodaMessage.isExpectReply =
            ReplyManagerUtils.isHdrExpectReply(aRawReps.header);
     yield Gloda.kWorkDone;
