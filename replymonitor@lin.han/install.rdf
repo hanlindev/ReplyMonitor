@@ -20,10 +20,12 @@
       </Description>
     </em:targetApplication>
 
+    <em:strictCompatibility>true</em:strictCompatibility>
+
 	  <em:optionsURL>chrome://replymanager/content/replyManagerPreferences.xul</em:optionsURL>
 
     <!-- Front End MetaData -->
-    <em:name>Reply Monitor 2</em:name>
+    <em:name>Reply Monitor</em:name>
     <em:description>Keep track of your emails and replies, now working on latest Thunderbird versions.</em:description>
     <em:creator>Han Lin</em:creator>
   </Description>
