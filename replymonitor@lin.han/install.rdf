@@ -7,7 +7,7 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
 
-    <em:id>replymonitor2@lin.han</em:id>
+    <em:id>replymonitor@lin.han</em:id>
     <em:version>1.0.0</em:version>
     <em:type>2</em:type>
 
@@ -24,10 +24,7 @@
 
     <!-- Front End MetaData -->
     <em:name>Reply Monitor 2</em:name>
-    <em:description>Keep track of your emails and replies</em:description>
+    <em:description>Keep track of your emails and replies, now working on latest Thunderbird versions.</em:description>
     <em:creator>Han Lin</em:creator>
-    <em:contributor>protz</em:contributor>
-    <em:contributor>Fallen</em:contributor>
-    <em:contributor>Amulya</em:contributor>
   </Description>
 </RDF>
